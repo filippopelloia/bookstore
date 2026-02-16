@@ -10,10 +10,20 @@ biblioteca = {
     "utenti": {}                   # Dictionary: nome utente -> lista libri presi
 }
 
+user_name = 'Andy'
 available_books = biblioteca["libri_disponibili"]
 rent_books = biblioteca["libri_prestati"]
 book_index = 1
 is_running = True
+
+
+def show_history():
+    print("--------------------------------------")
+    print("Your history")
+    print("--------------------------------------")
+
+    print("Biblioteca")
+    print(biblioteca)
 
 
 def show_main_menu(action):
@@ -33,7 +43,7 @@ def show_main_menu(action):
             show_available(book_index)
             borrow_book()
         case 4:
-            pass
+            show_history()
         case 5:
             print("--------------------------------------")
             print("Have a nice day!")
@@ -94,38 +104,47 @@ def borrow_book():
     return is_running
 
 
-while len(available_books) < 3:
-    new_book = input("Add a new book to the database: ").capitalize()
+def main(is_running):
 
-    add_book(new_book)
+    while len(available_books) < 3:
+        new_book = input("Add a new book to the database: ").capitalize()
 
-while is_running:
+        add_book(new_book)
 
-    is_running = borrow_book()
+    while is_running:
 
-main_menu = {
-    1: "Add a new book",
-    2: "Show the available books",
-    3: "Borrow a book",
-    4: "Show activity users",
-    5: "Exit"
-}
+        is_running = borrow_book()
 
-while True:
-    for key, value in main_menu.items():
-        print(f"{key} - {value}")
+    main_menu = {
+        1: "Add a new book",
+        2: "Show the available books",
+        3: "Borrow a book",
+        4: "Your activity",
+        5: "Exit"
+    }
 
-    action = input("What do you want to do? Insert a number and press ENTER: ")
+    while True:
+        for key, value in main_menu.items():
+            print(f"{key} - {value}")
 
-    if action.isdigit():
-        action = int(action)
+        action = input(
+            "What do you want to do? Insert a number and press ENTER: ")
 
-        show_main_menu(action)
+        if action.isdigit():
+            action = int(action)
 
-        if action == 5:
-            break
+            show_main_menu(action)
 
-    elif action.isalpha or action == " ":
-        print("Invalid value")
-    else:
-        print("Something went wrong")
+            if action == 5:
+                break
+
+        elif action.isalpha or action == " ":
+            print("Invalid value")
+        else:
+            print("Something went wrong")
+
+
+if __name__ == '__main__':
+    main(is_running)
+else:
+    print("Something is missing")
