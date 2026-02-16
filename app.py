@@ -32,8 +32,14 @@ def show_main_menu(action):
         case 3:
             show_available(book_index)
             borrow_book()
-        case _:
+        case 4:
             pass
+        case 5:
+            print("--------------------------------------")
+            print("Have a nice day!")
+            print("--------------------------------------")
+        case _:
+            print("Something went wrong, choose a different number")
 
 
 def show_available(book_index):
@@ -93,7 +99,6 @@ while len(available_books) < 3:
 
     add_book(new_book)
 
-
 while is_running:
 
     is_running = borrow_book()
@@ -115,10 +120,11 @@ while True:
     if action.isdigit():
         action = int(action)
 
-        # while true:
         show_main_menu(action)
-        # is_running = False
-        # break
+
+        if action == 5:
+            break
+
     elif action.isalpha or action == " ":
         print("Invalid value")
     else:
