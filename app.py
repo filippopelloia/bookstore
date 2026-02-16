@@ -19,6 +19,15 @@ book_index = 1
 is_running = True
 
 
+def download_history():
+
+    your_path = f"user_{user_id}_history.txt"
+
+    with open(your_path, "w") as file:
+        for key, value in history.items():
+            file.write(f"{key} - {value} \n")
+
+
 def show_history():
     print("--------------------------------------")
     print("Your history")
@@ -47,6 +56,8 @@ def show_main_menu(action):
         case 4:
             show_history()
         case 5:
+            download_history()
+        case 6:
             print("--------------------------------------")
             print("Have a nice day!")
             print("--------------------------------------")
@@ -135,7 +146,8 @@ def main(is_running):
         2: "Show the available books",
         3: "Borrow a book",
         4: "Your activity",
-        5: "Exit"
+        5: "Print your history",
+        6: "Exit"
     }
 
     while True:
