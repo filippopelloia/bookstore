@@ -12,7 +12,7 @@ biblioteca = {
 
 available_books = biblioteca["libri_disponibili"]
 rent_books = biblioteca["libri_prestati"]
-book_index = 1  # PAY ATTENTION TO THIS ONE, you need to update the index order when you remove a book
+book_index = 1
 is_running = True
 
 
@@ -29,7 +29,9 @@ def show_main_menu(action):
             print("--------------------------------------")
         case 2:
             show_available(book_index)
-            # is_running = False
+        case 3:
+            show_available(book_index)
+            borrow_book()
         case _:
             pass
 
@@ -54,13 +56,10 @@ def add_book(new_book):
         show_available(book_index)
 
 
-while len(available_books) < 3:
-    new_book = input("Add a new book to the database: ").capitalize()
-
-    add_book(new_book)
-
-
-while True:
+def borrow_book():
+    print("--------------------------------------")
+    print("Borrow book")
+    print("--------------------------------------")
     rent_book = input("Digit the number of the book you want to borrow: ")
 
     if rent_book.isdigit():
@@ -77,13 +76,27 @@ while True:
             print("--------------------------------------")
             print(f"You borrowed the book '{chosed_book}'")
             print("--------------------------------------")
-            break
+            is_running = False
         else:
             print("Something went wrong")
+            is_running = True
     elif rent_book.isalpha() or rent_book == " ":
         print("Invalid value, insert a number")
     else:
         print("Something went wrong")
+
+    return is_running
+
+
+while len(available_books) < 3:
+    new_book = input("Add a new book to the database: ").capitalize()
+
+    add_book(new_book)
+
+
+while is_running:
+
+    is_running = borrow_book()
 
 main_menu = {
     1: "Add a new book",
@@ -102,10 +115,10 @@ while True:
     if action.isdigit():
         action = int(action)
 
-        while is_running:
-            show_main_menu(action)
-            is_running = False
-        break
+        # while true:
+        show_main_menu(action)
+        # is_running = False
+        # break
     elif action.isalpha or action == " ":
         print("Invalid value")
     else:
