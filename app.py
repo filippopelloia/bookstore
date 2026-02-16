@@ -14,9 +14,17 @@ available_books = biblioteca["libri_disponibili"]
 rent_books = biblioteca["libri_prestati"]
 
 
-while len(available_books) < 3:
-    new_book = input("Add a new book to the database: ").capitalize()
+def show_main_menu(action):
+    match action:
+        case 1:
+            pass
+        case 2:
+            pass
+        case _:
+            pass
 
+
+def add_book(new_book):
     if new_book == " " or len(new_book) < 3:
         print("Invalid value")
     else:
@@ -32,6 +40,12 @@ while len(available_books) < 3:
         for book in available_books:
             print(f"{book_index} - {book}")
             book_index += 1
+
+
+while len(available_books) < 3:
+    new_book = input("Add a new book to the database: ").capitalize()
+
+    add_book(new_book)
 
 
 while True:
@@ -77,8 +91,7 @@ while True:
 
     if action.isdigit():
         action = int(action)
-
-        pass
+        show_main_menu(action)
     elif action.isalpha or action == " ":
         print("Invalid value")
     else:
