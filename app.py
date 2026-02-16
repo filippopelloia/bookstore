@@ -12,7 +12,8 @@ biblioteca = {
 
 available_books = biblioteca["libri_disponibili"]
 rent_books = biblioteca["libri_prestati"]
-book_index = 1
+book_index = 1  # PAY ATTENTION TO THIS ONE, you need to update the index order when you remove a book
+is_running = True
 
 
 def show_main_menu(action):
@@ -27,37 +28,30 @@ def show_main_menu(action):
             add_book(new_book)
             print("--------------------------------------")
         case 2:
-            pass
+            show_available(book_index)
+            # is_running = False
         case _:
             pass
 
 
 def show_available(book_index):
+    print("--------------------------------------")
+    print("Available books:")
+    print("--------------------------------------")
 
     for book in available_books:
         print(f"{book_index} - {book}")
         book_index += 1
+
+    print("--------------------------------------")
 
 
 def add_book(new_book):
     if new_book == " " or len(new_book) < 3:
         print("Invalid value")
     else:
-        print("Valid")
         available_books.append((new_book).strip())
-
-        print("--------------------------------------")
-        print("Available books: ")
-        print("--------------------------------------")
-
         show_available(book_index)
-
-
-        # book_index = 1
-""" 
-        for book in available_books:
-            print(f"{book_index} - {book}")
-            book_index += 1 """
 
 
 while len(available_books) < 3:
@@ -107,7 +101,11 @@ while True:
 
     if action.isdigit():
         action = int(action)
-        show_main_menu(action)
+
+        while is_running:
+            show_main_menu(action)
+            is_running = False
+        break
     elif action.isalpha or action == " ":
         print("Invalid value")
     else:
