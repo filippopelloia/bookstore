@@ -12,16 +12,31 @@ biblioteca = {
 
 available_books = biblioteca["libri_disponibili"]
 rent_books = biblioteca["libri_prestati"]
+book_index = 1
 
 
 def show_main_menu(action):
     match action:
         case 1:
-            pass
+
+            print("--------------------------------------")
+            print("Add a new book section")
+            print("--------------------------------------")
+
+            new_book = input("Add a new book to the database: ").capitalize()
+            add_book(new_book)
+            print("--------------------------------------")
         case 2:
             pass
         case _:
             pass
+
+
+def show_available(book_index):
+
+    for book in available_books:
+        print(f"{book_index} - {book}")
+        book_index += 1
 
 
 def add_book(new_book):
@@ -35,11 +50,14 @@ def add_book(new_book):
         print("Available books: ")
         print("--------------------------------------")
 
-        book_index = 1
+        show_available(book_index)
 
+
+        # book_index = 1
+""" 
         for book in available_books:
             print(f"{book_index} - {book}")
-            book_index += 1
+            book_index += 1 """
 
 
 while len(available_books) < 3:
@@ -53,8 +71,6 @@ while True:
 
     if rent_book.isdigit():
         rent_book = int(rent_book)
-
-        print(len(available_books))
 
         if 1 > rent_book or rent_book > len(available_books):
             print(f"Invalid value, choose a different number")
