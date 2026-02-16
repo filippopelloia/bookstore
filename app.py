@@ -47,14 +47,39 @@ while True:
 
         elif 1 <= rent_book and rent_book <= len(available_books):
             chosed_book = available_books[rent_book - 1]
-            print(f"You chosed: {chosed_book}")
             rent_books.append(chosed_book)
             del available_books[rent_book - 1]
 
+            print("--------------------------------------")
+            print(f"You borrowed the book '{chosed_book}'")
+            print("--------------------------------------")
             break
         else:
             print("Something went wrong")
     elif rent_book.isalpha() or rent_book == " ":
         print("Invalid value, insert a number")
+    else:
+        print("Something went wrong")
+
+main_menu = {
+    1: "Add a new book",
+    2: "Show the available books",
+    3: "Borrow a book",
+    4: "Show activity users",
+    5: "Exit"
+}
+
+while True:
+    for key, value in main_menu.items():
+        print(f"{key} - {value}")
+
+    action = input("What do you want to do? Insert a number and press ENTER: ")
+
+    if action.isdigit():
+        action = int(action)
+
+        pass
+    elif action.isalpha or action == " ":
+        print("Invalid value")
     else:
         print("Something went wrong")
