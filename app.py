@@ -1,4 +1,5 @@
 import os
+import datetime
 
 print("--------------------------------------")
 print("Welcome to the bookstore!")
@@ -10,9 +11,10 @@ biblioteca = {
     "utenti": {}                   # Dictionary: nome utente -> lista libri presi
 }
 
-user_name = 'Andy'
+user_id = 141
 available_books = biblioteca["libri_disponibili"]
 rent_books = biblioteca["libri_prestati"]
+history = biblioteca["utenti"]
 book_index = 1
 is_running = True
 
@@ -22,8 +24,8 @@ def show_history():
     print("Your history")
     print("--------------------------------------")
 
-    print("Biblioteca")
-    print(biblioteca)
+    for key, value in history.items():
+        print(f"{key} - {value}")
 
 
 def show_main_menu(action):
@@ -84,8 +86,21 @@ def borrow_book():
         if 1 > rent_book or rent_book > len(available_books):
             print(f"Invalid value, choose a different number")
 
+        # real action
         elif 1 <= rent_book and rent_book <= len(available_books):
             chosed_book = available_books[rent_book - 1]
+
+            """ if len(history) == 0:
+                history[user_id] = chosed_book
+            else:
+                print("You already booked something") """
+
+            now = datetime.datetime.now()
+            now = now.strftime("%d-%m-%Y %H:%M:%S")
+
+            history[now] = chosed_book
+
+            print(history)
             rent_books.append(chosed_book)
             del available_books[rent_book - 1]
 
